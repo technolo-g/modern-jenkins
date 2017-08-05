@@ -1,1 +1,2 @@
 #pattern  filter=crypt diff=crypt
+secure/* filter=crypt diff=crypt
