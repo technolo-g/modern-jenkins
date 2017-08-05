@@ -1,0 +1,28 @@
+---
+# deploy/master/docker-compose.yml
+# Define the version of the compose file we're using
+version: '3.3'
+
+# Define our services
+services:
+  # Jenkins master's configuration
+  master:
+    image: modernjenkins/jenkins-master
+    ports:
+      - "8080:8080"
+    volumes:
+      - plugins:/usr/share/jenkins/ref/plugins
+      - warfile:/usr/share/jenkins/ref/warfile
+
+  # Jenkins plugins' configuration
+  plugins:
+    image: modernjenkins/jenkins-plugins
+    volumes:
+      - plugins:/usr/share/jenkins/ref/plugins
+      - warfile:/usr/share/jenkins/ref/warfile
+
+# Define named volumes. These are what we use to share the data from one
+# container to another, thereby making our jenkins.war and plugins available
+volumes:
+  plugins:
+  warfile:
