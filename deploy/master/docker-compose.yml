@@ -16,6 +16,7 @@ services:
       - plugins:/usr/share/jenkins/ref/plugins
       - warfile:/usr/share/jenkins/ref/warfile
       - groovy:/var/jenkins_home/init.groovy.d
+      - ${PWD}/../../secure:/secure:ro
 
   # Jenkins plugins' configuration
   plugins:
