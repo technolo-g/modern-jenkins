@@ -2,7 +2,7 @@
 # images/jenkins-master/build.sh
 
 # Define our image name
-image_name=modernjenkins/jenkins-master:latest
+image_name=docker-ebs.demo-aws.continuityci.com/modernjenkins/jenkins-master:latest
 
 # Accept any args passed and add them to the command
 docker image build ${@} -t $image_name $(dirname -- "$0")

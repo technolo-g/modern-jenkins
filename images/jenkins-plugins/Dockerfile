@@ -34,8 +34,11 @@ VOLUME /usr/share/jenkins/ref/plugins
 VOLUME /usr/share/jenkins/ref/warfile
 VOLUME /usr/share/jenkins/ref/init.groovy.d
 
+ADD files/start.sh /start.sh
+ENTRYPOINT ["/start.sh"]
+
 # It's easy to get confused when just a volume is being used, so let's just keep
 # the container alive for clarity. This entrypoint will keep the container
 # running for... infinity!
-ENTRYPOINT ["sleep", "infinity"]
+# ENTRYPOINT ["sleep", "infinity"]
 
