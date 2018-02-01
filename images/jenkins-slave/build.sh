@@ -1,8 +1,8 @@
 #!/bin/bash -el
-# images/jenkins-master/build.sh
+# images/jenkins-slave/build.sh
 
 # Define our image name
-image_name=modernjenkins/jenkins-master:latest
+image_name=modernjenkins/jenkins-slave:latest
 
 # Accept any args passed and add them to the command
 docker image build ${@} -t $image_name $(dirname -- "$0")

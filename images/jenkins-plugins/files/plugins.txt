@@ -2,3 +2,4 @@ credentials
 github
 greenballs
 groovy
+kubernetes
