@@ -1,0 +1,47 @@
+// This build file allows Groovy scripts easy code integration with Jenkins source code
+// Inspired by https://github.com/tdongsi/jenkins-config
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'idea'
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+repositories {
+    maven { url 'https://repo.jenkins-ci.org/releases/'}
+    maven { url 'https://repo.jenkins-ci.org/public/'}
+    mavenCentral()
+}
+
+sourceSets {
+    // Additional source set for the init scripts embedded within the plugins image (TODO: Move to its own image?)
+    initScripts {
+        groovy {
+            srcDir 'images/jenkins-plugins/files/init.groovy.d'
+        }
+    }
+}
+
+dependencies {
+    // The basics - Groovy, Jenkins, etc
+    compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.8'
+    compile group: 'org.jenkins-ci.main', name: 'jenkins-core', version: '2.121.1'
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    // General Jenkins plugins - TODO: Parse out of plugins.txt transitively somehow and translate to Maven style deps
+    compile group: 'org.jenkins-ci.plugins', name: 'credentials', version: '2.1.13', ext: 'jar'
+
+    // Optional: Place non-hosted plugins in the lib dir to have them recognized within the IDE
+    compile fileTree(dir: 'lib', include: ['*.jar'])
+}
+
+// A way to test run a Groovy script within this context with the dependencies on the classpath
+task runScript (dependsOn: 'classes', type: JavaExec) {
+    main = 'Temp'
+    classpath = sourceSets.main.runtimeClasspath
+}

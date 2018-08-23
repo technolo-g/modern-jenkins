@@ -1,2 +1,6 @@
 #pattern  filter=crypt diff=crypt
 secure/* filter=crypt diff=crypt
+
+*.sh text eol=lf
+gradlew text eol=lf
+groovyw text eol=lf
