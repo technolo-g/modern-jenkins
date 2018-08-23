@@ -17,12 +17,12 @@ ENV uid=1000
 ENV gid=1000
 
 # Jenkins Version info
-ENV JENKINS_VERSION 2.69
-ENV JENKINS_SHA d1ad00f4677a053388113020cf860e05a72cef6ee64f63b830479c6ac5520056
+ENV JENKINS_VERSION 2.121.1
+ENV JENKINS_SHA 5bb075b81a3929ceada4e960049e37df5f15a1e3cfc9dc24d749858e70b48919
 
 # These URLs can be swapped out for internal repos if needed. Secrets required may vary :)
 ENV JENKINS_UC https://updates.jenkins.io
-ENV JENKINS_URL http://mirrors.jenkins.io/war/${JENKINS_VERSION}/jenkins.war
+ENV JENKINS_URL https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
 
 # Jenkins is run with user `jenkins`, uid = 1000
 # If you bind mount a volume from the host or a data container,
@@ -42,4 +42,3 @@ RUN unlink /etc/localtime && ln -s /usr/share/zoneinfo/America/Denver /etc/local
 # Install Java, Git, and Unzip
 RUN yum install -y java-1.8.0-openjdk-devel tzdata-java git unzip \
     && yum clean all
-

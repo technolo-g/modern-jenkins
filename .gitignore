@@ -1,0 +1,27 @@
+# Ignore IntelliJ
+.idea
+*.iml
+*.ipr
+*.iws
+
+# Ignore Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# Ignore Linux
+*.directory
+
+#Ignore OSX
+Icon
+.DS_Store
+.DS_Store?
+
+#Ignore Windows
+ehthumbs.db
+Thumbs.db
+
+# Ignore other
+.vagrant
+.gradle
