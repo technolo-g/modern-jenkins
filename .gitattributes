@@ -2,5 +2,8 @@
 secure/* filter=crypt diff=crypt
 
 *.sh text eol=lf
+jenkins-support text eol=lf
+plugins.txt text eol=lf
+Dockerfile text eol=lf
 gradlew text eol=lf
 groovyw text eol=lf
