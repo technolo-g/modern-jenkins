@@ -2,3 +2,8 @@ credentials
 github
 greenballs
 groovy
+workflow-support
+job-dsl
+cloudbees-folder
+gradle
+email-ext

@@ -12,6 +12,7 @@ idea {
 }
 
 repositories {
+    jcenter()
     maven { url 'https://repo.jenkins-ci.org/releases/'}
     maven { url 'https://repo.jenkins-ci.org/public/'}
     mavenCentral()
@@ -21,7 +22,15 @@ sourceSets {
     // Additional source set for the init scripts embedded within the plugins image (TODO: Move to its own image?)
     initScripts {
         groovy {
-            srcDir 'images/jenkins-plugins/files/init.groovy.d'
+            srcDirs 'images/jenkins-plugins/files/init.groovy.d'
+            compileClasspath += main.compileClasspath
+        }
+    }
+
+    jobs {
+        groovy {
+            srcDirs 'jobs'
+            compileClasspath += main.compileClasspath
         }
     }
 }
@@ -29,12 +38,18 @@ sourceSets {
 dependencies {
     // The basics - Groovy, Jenkins, etc
     compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.8'
-    compile group: 'org.jenkins-ci.main', name: 'jenkins-core', version: '2.121.1'
+    compile group: 'org.jenkins-ci.main', name: 'jenkins-core', version: '2.138.2'
     compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     // General Jenkins plugins - TODO: Parse out of plugins.txt transitively somehow and translate to Maven style deps
     compile group: 'org.jenkins-ci.plugins', name: 'credentials', version: '2.1.13', ext: 'jar'
+
+    // Job DSL and plugins used in examples
+    compile group: 'org.jenkins-ci.plugins', name: 'job-dsl', version: '1.70', ext: 'jar'
+    compile group: 'org.jenkins-ci.plugins', name: 'cloudbees-folder', version: '6.7', ext: 'jar'
+    compile group: 'org.jenkins-ci.plugins', name: 'gradle', version: '1.29', ext: 'jar'
+    compile group: 'org.jenkins-ci.plugins', name: 'email-ext', version: '2.63', ext: 'jar'
 
     // Optional: Place non-hosted plugins in the lib dir to have them recognized within the IDE
     compile fileTree(dir: 'lib', include: ['*.jar'])

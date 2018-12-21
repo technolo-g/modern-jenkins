@@ -14,6 +14,9 @@ ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 # or config file with your custom jenkins Docker image.
 RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d
 
+# Do the thing but for DSL scripts
+RUN mkdir -p /usr/share/jenkins/ref/dslScripts
+
 # # Disable the upgrade banner & admin pw (we will add one later)
 RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state \
     && echo 2.0 > ${JENKINS_HOME}/jenkins.install.InstallUtil.lastExecVersion
