@@ -24,6 +24,9 @@ ENV JENKINS_SHA d8ed5a7033be57aa9a84a5342b355ef9f2ba6cdb490db042a6d03efb23ca1e83
 ENV JENKINS_UC https://updates.jenkins.io
 ENV JENKINS_URL https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
 
+# Optional extra hook for Job DSL examples, used in one of the init scripts if present. No env var == no job DSL set up
+ENV DSL_REPO https://github.com/sheehan/job-dsl-gradle-example.git
+
 # Jenkins is run with user `jenkins`, uid = 1000
 # If you bind mount a volume from the host or a data container,
 # ensure you use the same uid
