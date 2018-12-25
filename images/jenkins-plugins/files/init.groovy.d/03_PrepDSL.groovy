@@ -18,3 +18,13 @@ new DslScriptLoader(jobManagement).runScript(jobDslScript.text)
 
 // Schedule the job to run so the jobs are created when Jenkins starts - or skip this for more control
 Jenkins.instance.getItemByFullName('seed-job', FreeStyleProject.class).scheduleBuild(new UserIdCause())
+
+
+// Secondary job seeder using a local dir
+def jobDslScript2 = new File("/var/jenkins_home/init.groovy.d/SeedJobDSL2.groovy.DSL")
+def workspace2 = new File("/tmp/dsl")
+def jobManagement2 = new JenkinsJobManagement(System.out, [:], workspace2)
+new DslScriptLoader(jobManagement2).runScript(jobDslScript2.text)
+
+// Schedule the job to run so the jobs are created when Jenkins starts.
+Jenkins.instance.getItemByFullName('seed-job2', FreeStyleProject.class).scheduleBuild(new UserIdCause())
