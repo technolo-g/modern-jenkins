@@ -1,5 +1,6 @@
 job('seed-job') {
     description('Seed Job to create other DSL-based jobs')
+    label("master")
     scm {
         git("${System.getenv("DSL_REPO")}")
     }
