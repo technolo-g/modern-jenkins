@@ -1,5 +1,6 @@
 job('JenkinsGentleRestart') {
     description('Gently swaddles Jenkins into goodnight mode, sings it a lullaby while waiting for any jobs to finish, then restarts.')
+    label("master")
     steps {
         systemGroovyCommand ('''
             /*
