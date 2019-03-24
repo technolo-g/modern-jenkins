@@ -1,8 +1,8 @@
-job('seed-job') {
-    description('Seed Job to create other DSL-based jobs')
+job('SeedJobUtilityDSL') {
+    description('Seed Job to create DSL repo-provided utility jobs')
     label("master")
     scm {
-        git("${System.getenv("DSL_REPO")}")
+        git("${System.getenv("GITOPS_DSL_REPO")}")
     }
     triggers {
         // Every 15 minutes poll to see if there are new changes

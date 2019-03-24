@@ -23,7 +23,9 @@ Vagrant.configure("2") do |config|
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
     apt-get update
-    apt-get install -y docker-ce dos2unix
+
+    # Temporarily tied to a specific version of Docker due to https://github.com/docker/for-linux/issues/591
+    apt-get install -y docker-ce=18.06.1~ce~3-0~ubuntu dos2unix
 
     curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose

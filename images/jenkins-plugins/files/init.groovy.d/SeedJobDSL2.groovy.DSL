@@ -1,5 +1,5 @@
-job('seed-job2') {
-    description('Seed Job to create other DSL-based jobs')
+job('SeedJobInternal') {
+    description('Seed Job to showcase using DSL from scripts stored locally')
     label("master")
     customWorkspace('/var/jenkins_home/dslScripts')
     concurrentBuild(false)

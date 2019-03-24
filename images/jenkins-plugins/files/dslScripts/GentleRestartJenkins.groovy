@@ -1,21 +1,21 @@
-job('JenkinsGentleRestart') {
+job('BundledJenkinsGentleRestart') {
     description('Gently swaddles Jenkins into goodnight mode, sings it a lullaby while waiting for any jobs to finish, then restarts.')
     label("master")
     steps {
         systemGroovyCommand ('''
             /*
                 Copyright (c) 2015-2018 Sam Gleske - https://github.com/samrocketman/jenkins-script-console-scripts
-    
+
                 Permission is hereby granted, free of charge, to any person obtaining a copy of
                 this software and associated documentation files (the "Software"), to deal in
                 the Software without restriction, including without limitation the rights to
                 use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
                 the Software, and to permit persons to whom the Software is furnished to do so,
                 subject to the following conditions:
-    
+
                 The above copyright notice and this permission notice shall be included in all
                 copies or substantial portions of the Software.
-    
+
                 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
                 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
                 FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
@@ -27,32 +27,32 @@ job('JenkinsGentleRestart') {
                This script starts a background thread which will wait for Jenkins to finish
                executing jobs before restarting.  The thread will abort if shutdown mode is
                disabled before jobs finish.
-    
+
                Tested on Jenkins ver. 2.7.1
             */
-    
+
             import hudson.model.RestartListener
             import java.util.logging.Level
             import java.util.logging.Logger
             import jenkins.model.*
-    
+
             //user configurable variable
             if(!binding.hasVariable('timeout_seconds')) {
                 timeout_seconds = 10
             }
-    
+
             if(timeout_seconds in String) {
                 timeout_seconds = Integer.decode(timeout_seconds)
             }
-    
+
             //type check user defined parameters/bindings
             if(!(timeout_seconds in Integer)) {
                 throw new Exception('PARAMETER ERROR: timeout_seconds must be an integer.')
             }
-    
+
             Logger logger = Logger.getLogger('jenkins.instance.restart')
             Jenkins.instance.doQuietDown();
-    
+
             //start a background thread
             def thread = Thread.start {
                 logger.log(Level.INFO, "Jenkins safe restart initiated.")
@@ -70,7 +70,7 @@ job('JenkinsGentleRestart') {
                     }
                 }
             }
-    
+
             println 'A safe restart has been scheduled.  See the Jenkins logs for restart status updates.  Logger is jenkins.instance.restart.'
         ''')
     }

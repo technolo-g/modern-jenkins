@@ -7,3 +7,6 @@ job-dsl
 cloudbees-folder
 gradle
 email-ext
+startup-trigger-plugin
+workflow-cps-global-lib
+matrix-auth

@@ -24,8 +24,20 @@ ENV JENKINS_SHA d8ed5a7033be57aa9a84a5342b355ef9f2ba6cdb490db042a6d03efb23ca1e83
 ENV JENKINS_UC https://updates.jenkins.io
 ENV JENKINS_URL https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
 
-# Optional extra hook for Job DSL examples, used in one of the init scripts if present. No env var == no job DSL set up
-ENV DSL_REPO https://github.com/sheehan/job-dsl-gradle-example.git
+# Optional extra hook for Job DSL examples, used in one of the init scripts if present. No DSL repo env var == no job DSL set up
+ENV GITOPS_DSL_REPO https://github.com/Cervator/GitOpsUtilityJobs.git
+
+# The manifest repo is meant to contain additional configuration
+ENV GITOPS_MANIFEST_REPO https://github.com/Cervator/GitOpsManifest.git
+
+# This context allows a set of tiered Jenkins Masters to pull config out from a specific tier
+ENV GITOPS_JENKINS_CONTEXT dev
+
+# Default examples work without credentials but will read this one if set (creating it in Jenkins is a different topic)
+# ENV GIT_CREDENTIAL SomeCredential
+
+# Optional extra - set a different branch to use by default (which is master)
+# ENV GITOPS_PLATFORM_LEVEL develop
 
 # Jenkins is run with user `jenkins`, uid = 1000
 # If you bind mount a volume from the host or a data container,
