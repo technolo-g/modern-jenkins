@@ -17,8 +17,8 @@ ENV uid=1000
 ENV gid=1000
 
 # Jenkins Version info
-ENV JENKINS_VERSION 2.138.2
-ENV JENKINS_SHA d8ed5a7033be57aa9a84a5342b355ef9f2ba6cdb490db042a6d03efb23ca1e83
+ENV JENKINS_VERSION 2.164.3
+ENV JENKINS_SHA a8af991f9085ff7f12baa2c9978554b2a18e5c4ed84327224d30e269e8f4a50e
 
 # These URLs can be swapped out for internal repos if needed. Secrets required may vary :)
 ENV JENKINS_UC https://updates.jenkins.io
@@ -51,8 +51,8 @@ RUN mkdir -p ${JENKINS_ROOT}
 RUN chown jenkins /usr/local/bin/* ${JENKINS_ROOT} \
     && chmod +x /usr/local/bin/*
 
-# Configure to Denver timezone. I dislike debugging failures in UTC
-RUN unlink /etc/localtime && ln -s /usr/share/zoneinfo/America/Denver /etc/localtime
+# Configure to New York TZ
+RUN unlink /etc/localtime && ln -s /usr/share/zoneinfo/America/New_York /etc/localtime
 
 # Install Java, Git, and Unzip
 RUN yum install -y java-1.8.0-openjdk-devel tzdata-java git unzip \
