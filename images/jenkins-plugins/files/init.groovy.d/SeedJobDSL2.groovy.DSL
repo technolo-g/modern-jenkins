@@ -1,4 +1,4 @@
-job('SeedJobInternal') {
+job('GitOpsUtility/SeedJobInternal') {
     description('Seed Job to showcase using DSL from scripts stored locally')
     label("master")
     customWorkspace('/var/jenkins_home/dslScripts')

@@ -34,6 +34,9 @@ RUN chown jenkins /usr/local/bin/* && chmod +x /usr/local/bin/*
 # are stored and we are going to use volumes to persist them
 RUN mkdir -p ${JENKINS_HOME}/jobs && chown ${user}:${group} ${JENKINS_HOME}/jobs
 
+# Handy text editor
+RUN yum install -y nano
+
 # Install Docker (for docker-slaves plugin)
 RUN yum-config-manager --add-repo \
       https://download.docker.com/linux/centos/docker-ce.repo \

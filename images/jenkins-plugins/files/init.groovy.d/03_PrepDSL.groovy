@@ -17,7 +17,7 @@ def jobManagement = new JenkinsJobManagement(System.out, [:], workspace)
 new DslScriptLoader(jobManagement).runScript(jobDslScript.text)
 
 // Schedule the job to run so the jobs are created when Jenkins starts - or skip this for more control
-Jenkins.instance.getItemByFullName('SeedJobUtilityDSL', FreeStyleProject.class).scheduleBuild(new UserIdCause())
+Jenkins.instance.getItemByFullName('GitOpsUtility/SeedJobUtilityDSL', FreeStyleProject.class).scheduleBuild(new UserIdCause())
 
 // Secondary seed job used to demonstrate loading a file directly instead of a repository
 def jobDslScript2 = new File("/var/jenkins_home/init.groovy.d/SeedJobDSL2.groovy.DSL")
@@ -26,4 +26,4 @@ def jobManagement2 = new JenkinsJobManagement(System.out, [:], workspace2)
 new DslScriptLoader(jobManagement2).runScript(jobDslScript2.text)
 
 // Schedule the job to run so the jobs are created when Jenkins starts.
-Jenkins.instance.getItemByFullName('SeedJobInternal', FreeStyleProject.class).scheduleBuild(new UserIdCause())
+Jenkins.instance.getItemByFullName('GitOpsUtility/SeedJobInternal', FreeStyleProject.class).scheduleBuild(new UserIdCause())

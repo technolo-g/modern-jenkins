@@ -10,3 +10,5 @@ email-ext
 startup-trigger-plugin
 workflow-cps-global-lib
 matrix-auth
+workflow-job
+workflow-aggregator
