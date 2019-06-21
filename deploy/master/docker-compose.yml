@@ -19,6 +19,11 @@ services:
       - dsl:/var/jenkins_home/dslScripts
       - ${PWD}/../../secure:/secure:ro
 
+      # This gets a little tricky. Vagrant maps the root of this workspace into /vagrant inside the Vagrant guest
+      # If that is mapped via Docker to be accessible inside a container then in some cases it may not sync "twice"
+      # As a solution we use a little rsync script that simply pushes files from the Vagrant mapping to this Docker one
+      - /var/vagrant:/var/vagrant
+
   # Jenkins plugins' configuration
   plugins:
     image: modernjenkins/jenkins-plugins
@@ -28,10 +33,39 @@ services:
       - groovy:/usr/share/jenkins/ref/init.groovy.d
       - dsl:/usr/share/jenkins/ref/dslScripts
 
+  # Bundled Gitea for easy access Git repos inside the setup
+  # NOTE: Having a local address (say for a Jenkins job's Git target) within the containers gets tricky
+  # See https://github.com/docker/for-linux/issues/264 - `gateway` seems to work on Linux, but may not on Win/Mac ..
+  web:
+    image: gitea/gitea:1.7.1
+    volumes:
+      - data:/data
+    ports:
+      - "3000:3000"
+      - "2222:22"
+    depends_on:
+      - db
+    restart: always
+  db:
+    image: mariadb:10
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=changeme
+      - MYSQL_DATABASE=gitea
+      - MYSQL_USER=gitea
+      - MYSQL_PASSWORD=changeme
+    volumes:
+      - db:/var/lib/mysql
+
 # Define named volumes. These are what we use to share the data from one
 # container to another, thereby making our jenkins.war and plugins available
 volumes:
+  # Jenkins stuff
   plugins:
   warfile:
   groovy:
   dsl:
+
+  # Gitea stuff
+  db:
+  data:

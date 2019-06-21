@@ -41,9 +41,14 @@ At this stage to see the new stuff in action from a fresh clone using Vagrant do
 * `cd /vagrant/images/jenkins-base` + `./build.sh` to build the first Docker image (the base for the other two images)
 * `cd ../jenkins-master/` + `./build.sh` to build the second image - this contains the Jenkins master itself
 * `cd ../jenkins-plugins/` + `./build.sh` to build the third and final image - this contains plugins, init scripts, and DSL stuff
-* `cd ../../deploy/master/` + `./start.sh` to then actually use Docker Compose to stand up everything involved, launching Jenkins to http://localhost:8080
+* `cd ../../deploy/master/` + `./restart.sh` to then actually use Docker Compose to stand up everything involved
+  * Jenkins will be available at http://localhost:8080
+  * Gitea will be available at http://localhost:3000
+  * If you want to *reset* both then use `./reset.sh` instead
 
 A presentation PDF is included with the repo that covers "Hobo GitOps" - eventually a webinar recording of some sort should become available :-)
+
+A second presentation PDF is also included for a similar talk focusing on Incident Management
 
 ## Future stuff
 

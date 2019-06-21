@@ -12,7 +12,11 @@ Vagrant.configure("2") do |config|
   # Forward expected guest Jenkins to host 8080
   config.vm.network "forwarded_port", guest: 8080, host: 8080
 
-  # Use root on subsequent vagrant ssh calls because easy and secure, right? Throwaway dev box :-)
+  # Forward Gitea
+  config.vm.network "forwarded_port", guest: 3000, host: 3000
+  config.vm.network "forwarded_port", guest: 2222, host: 2222
+
+  # Use root on subsequent vagrant ssh calls because easy and secure, right? Throwaway dev box, not for production! :-)
   if VAGRANT_COMMAND == "ssh"
     config.ssh.username = 'root'
     config.ssh.insert_key = 'false'
@@ -35,4 +39,11 @@ Vagrant.configure("2") do |config|
 
     cp /home/vagrant/.ssh/authorized_keys /root/.ssh
   SHELL
+
+  # Place a little script that'll run on boot (vagrant up / reload) and sync /vagrant -> /var/vagrant (for inner Docker sync)
+  config.vm.provision "file", source: "sync.sh", destination: "/tmp/sync.sh"
+  config.vm.provision "shell", inline: "mv /tmp/sync.sh /opt/sync.sh"
+  config.vm.provision "shell", inline: "chmod a+x /opt/sync.sh"
+  config.vm.provision "shell", inline: "/opt/sync.sh > /dev/null 2>&1 &", run: "always"
+
 end
