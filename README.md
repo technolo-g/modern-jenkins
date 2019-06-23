@@ -33,6 +33,7 @@ Beyond the original tutorial covering mostly base Jenkins and Docker topics some
 * [PR #2](https://github.com/Cervator/modern-jenkins/pull/2) - Better Gradle and Groovy integration
 * [PR #3](https://github.com/Cervator/modern-jenkins/pull/3) - Hooking up Job DSL including samples (later enhanced further)
 * [PR #4](https://github.com/Cervator/modern-jenkins/pull/4) - Hobo GitOps! Expand control further to include external DSL and Manifest repos
+* [PR #5](https://github.com/Cervator/modern-jenkins/pull/5) - Use Gitea for embedded Git repos + sync files from workspace into Docker
 
 At this stage to see the new stuff in action from a fresh clone using Vagrant do the following:
 
