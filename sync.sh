@@ -11,6 +11,6 @@ while true; do
 
   rsync -avu --delete "/vagrant/" "/var/vagrant";
 
-  sleep 2;
+  sleep 1;
 
 done
