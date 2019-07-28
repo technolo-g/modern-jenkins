@@ -45,7 +45,7 @@ At this stage to see the new stuff in action from a fresh clone using Vagrant do
 * `cd ../../deploy/master/` + `./restart.sh` to then actually use Docker Compose to stand up everything involved
   * Jenkins will be available at http://localhost:8080
   * Gitea will be available at http://localhost:3000
-  * If you want to *reset* both then use `./reset.sh` instead
+  * If you want to *wipe* volumes for both then use `./wipe.sh` instead of the restart script
 
 A presentation PDF is included with the repo that covers "Hobo GitOps" - eventually a webinar recording of some sort should become available :-)
 

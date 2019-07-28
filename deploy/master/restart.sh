@@ -1,6 +1,6 @@
 #!/bin/bash -el
 
-echo "INFO: (re)Starting Jenkins & Gitea without volume reset"
+echo "INFO: (re)Starting Jenkins & Gitea without volume wipe"
 docker-compose stop
 docker-compose up -d
 
