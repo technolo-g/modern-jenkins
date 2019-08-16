@@ -42,7 +42,7 @@ At this stage to see the new stuff in action from a fresh clone using Vagrant do
 * `cd /vagrant/images/jenkins-base` + `./build.sh` to build the first Docker image (the base for the other two images)
 * `cd ../jenkins-master/` + `./build.sh` to build the second image - this contains the Jenkins master itself
 * `cd ../jenkins-plugins/` + `./build.sh` to build the third and final image - this contains plugins, init scripts, and DSL stuff
-* `cd ../../deploy/master/` + `./restart.sh` to then actually use Docker Compose to stand up everything involved
+* `cd ../../deploy/master/` + `chmod +x *.sh` +`./restart.sh` to then actually use Docker Compose to stand up everything involved
   * Jenkins will be available at http://localhost:8080
   * Gitea will be available at http://localhost:3000
   * If you want to *wipe* volumes for both then use `./wipe.sh` instead of the restart script
